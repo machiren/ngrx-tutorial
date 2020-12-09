@@ -1,15 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
+import { Todo } from "../../models/todo.model";
 
 @Component({
-  selector: 'app-todo-form',
-  templateUrl: './todo-form.component.html',
-  styleUrls: ['./todo-form.component.less']
+  selector: "app-todo-form",
+  templateUrl: "./todo-form.component.html",
+  styleUrls: ["./todo-form.component.less"],
 })
-export class TodoFormComponent implements OnInit {
+export class TodoFormComponent {
+  @Input() loading: boolean;
+  @Output() create = new EventEmitter<Partial<Todo>>();
 
-  constructor() { }
+  form = this.fb.group({
+    text: ["", Validators.required],
+  });
 
-  ngOnInit() {
+  constructor(private fb: FormBuilder) {}
+
+  onSubmit() {
+    const text: string = this.form.get("text").value;
+    const todo: Partial<Todo> = {
+      text,
+    };
+    this.create.emit(todo);
+    this.form.reset();
   }
-
 }
