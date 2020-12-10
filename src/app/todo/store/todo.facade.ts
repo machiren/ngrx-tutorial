@@ -11,28 +11,5 @@ import * as TodoActions from "./todo.actions";
   providedIn: TodoStoreModule, // 'root' でもOK
 })
 export class TodoFacade {
-  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
-  todos$ = this.store.pipe(select(TodoSelectors.getTodos));
-
   constructor(private store: Store<State>) {}
-
-  loadAll() {
-    this.store.dispatch(TodoActions.loadAll());
-  }
-
-  load(id: number) {
-    this.store.dispatch(TodoActions.load({ id }));
-  }
-
-  create(todo: Partial<Todo>) {
-    this.store.dispatch(TodoActions.create({ todo }));
-  }
-
-  update(todo: Todo) {
-    this.store.dispatch(TodoActions.update({ todo }));
-  }
-
-  remove(id: number) {
-    this.store.dispatch(TodoActions.remove({ id }));
-  }
 }
