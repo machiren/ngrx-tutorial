@@ -27,7 +27,7 @@ export const loadFailure = createAction(
 
 export const create = createAction(
   "[Todo Page] Create",
-  props<{ todo: Partial<Todo> }>()
+  props<{ todo: Todo }>()
 );
 
 export const createSuccess = createAction(

@@ -13,12 +13,19 @@ export class TodoComponent implements OnInit {
   constructor(private readonly todoService: TodoFacade) {}
 
   ngOnInit() {}
-  create(todo: Partial<Todo>) {
+  create(todo: Todo) {
     const date = new Date();
     todo.checked = false;
     todo.createdAt = Math.floor(date.getTime() / 1000);
     todo.updatedAt = Math.floor(date.getTime() / 1000);
+    this.todoService.create(todo);
   }
-  update(todo: Todo) {}
-  remove(id: number) {}
+
+  update(todo: Todo) {
+    this.todoService.update(todo);
+  }
+
+  remove(id: number) {
+    this.todoService.remove(id);
+  }
 }
