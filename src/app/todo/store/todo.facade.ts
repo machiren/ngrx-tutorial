@@ -6,25 +6,15 @@ import { State } from "./todo.reducer";
 import { TodoStoreModule } from "./todo-store.module";
 import * as TodoSelectors from "./todo.selector";
 import * as TodoActions from "./todo.actions";
+import { remove } from "./todo.actions";
 
 @Injectable({
   providedIn: TodoStoreModule, // 'root' でもOK
 })
 export class TodoFacade {
-  loading$ = this.store.pipe(select(TodoSelectors.getLoading));
-  todos$ = this.store.pipe(select(TodoSelectors.getTodos));
-
   constructor(private store: Store<State>) {}
 
-  loadAll() {
-    this.store.dispatch(TodoActions.loadAll());
-  }
-
-  load(id: number) {
-    this.store.dispatch(TodoActions.load({ id }));
-  }
-
-  create(todo: Partial<Todo>) {
+  create(todo: Todo) {
     this.store.dispatch(TodoActions.create({ todo }));
   }
 
