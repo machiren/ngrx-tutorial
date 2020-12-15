@@ -15,6 +15,9 @@ export const initialState: State = { loading: false, todos: [] };
 export const reducer = createReducer(
   initialState,
   on(TodoActions.load, (state) => ({ ...state, loading: true })),
+  on(TodoActions.loadSuccess, (state) => ({ ...state, loading: false })),
+  on(TodoActions.loadFailure, (state) => ({ ...state, loading: false })),
+  on(TodoActions.loadAll, (state) => ({ ...state })),
   on(TodoActions.create, (state, todo) => ({
     ...state,
     loading: false,
